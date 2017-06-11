@@ -10,8 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::resource('bands', 'BandController');
+Route::resource('albums', 'AlbumController');
 
 Route::get('/', function () {
-    $bands = \App\Band::all();
-    return view('bands.index', ['bands' => $bands]);
+    return redirect('/bands');
 });
+
+Route::get('/homepage', function () {
+    return redirect('/bands');
+});
+

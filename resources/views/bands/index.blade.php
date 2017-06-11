@@ -11,7 +11,7 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
-                <th data-field="name" data-sortable="true">Name</th>
+                <th data-field="name" data-sortable="true">Band Name</th>
                 <th data-field="start_date" data-sortable="true">Start Date</th>
                 <th data-field="website" data-sortable="true">Website</th>
                 <th data-field="active" data-sortable="true">Band Is Still Active</th>
