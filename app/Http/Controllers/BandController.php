@@ -8,6 +8,7 @@ class BandController extends Controller
 {
         public function index()
         {
-            return view('bands.index');
+            $bands = Band::all();
+            return view('bands.index', compact('bands'));
         }
 }

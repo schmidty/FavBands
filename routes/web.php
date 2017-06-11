@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return view('bands.index');
+    $bands = \App\Band::all();
+    return view('bands.index', ['bands' => $bands]);
 });
