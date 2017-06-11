@@ -15,7 +15,8 @@ class CreateBandAlbumTables extends Migration
     {
 		Schema::create('band', function(Blueprint $table) {
 			$table->increments('id');
-			$table->date('start_date');
+			$table->string('name', 150);
+			$table->string('start_date', 4);
 			$table->string('website', 999);
 			$table->boolean('still_active')->default(1);
 
@@ -24,14 +25,15 @@ class CreateBandAlbumTables extends Migration
 
                 Schema::create('album', function(Blueprint $table) {
 			$table->increments('id');
-                        $table->integer('band_id');
+			$table->integer('band_id')->unsigned()->default(0);
+                        $table->foreign('band_id')->references('id')->on('band')->onDelete('cascade');
                         $table->string('name');
-                        $table->date('recorded_date');
+                        $table->string('recorded_date');
                         $table->date('release_date');
                         $table->integer('numberoftracks');
-                        $table->string('label');
-                        $table->string('producer');
-                        $table->string('genre');
+                        $table->string('label', 250);
+                        $table->string('producer', 250);
+                        $table->string('genre', 150);
 
 			$table->engine = 'innodb';
                 });
