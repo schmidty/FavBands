@@ -12,30 +12,13 @@ class BandsAlbumsSeeder extends Seeder
     public function run()
     {
             // Bands
-            DB::table("band")->insert([
-                'name'=>"Guns 'N Roses",
-                'start_date'=>"1985",
-                'website'=>"http://www.gunsnroses.com/",
-                'still_active'=>1
-            ]);
-            DB::table("band")->insert([
-                'name'=>"Led Zeppelin",
-                'start_date'=>"1968",
-                'website'=>"http://www.ledzeppelin.com/",
-                'still_active'=>0
-            ]);
-            DB::table("band")->insert([
-                'name'=>"Aerosmith",
-                'start_date'=>"1970",
-                'website'=>"http://www.aerosmith.com/",
-                'still_active'=>1
-            ]);
-            DB::table("band")->insert([
-                'name'=>"Queen",
-                'start_date'=>"1970",
-                'website'=>"http://www.queenonline.com/",
-                'still_active'=>1
-            ]);
+            $bands = array(
+                ['name'=>"Guns 'N Roses",'start_date'=>"1985", 'website'=>"http://www.gunsnroses.com/",'still_active'=>1],
+                ['name'=>"Led Zeppelin",'start_date'=>"1968",'website'=>"http://www.ledzeppelin.com/",'still_active'=>0],
+                ['name'=>"Aerosmith",'start_date'=>"1970",'website'=>"http://www.aerosmith.com/",'still_active'=>1],
+                ['name'=>"Queen",'start_date'=>"1970",'website'=>"http://www.queenonline.com/",'still_active'=>1],
+            );
+            DB::table("band")->insert($bands);
             
 
             // Albums
