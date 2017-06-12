@@ -8,12 +8,25 @@
 
 @section('content')
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
 
 {!! Form::open([
     'route' => 'bands.store'
 ]) !!}
 
 @include('bands.fields')
+
+<div class="form-group">
+    {!! Form::label('still_active', 'Still Active:', ['class' => 'control-label']) !!}
+    {!! Form::checkbox('still_active', '1', ['checked'=>'checked']) !!}
+</div>
+
 
 {!! Form::submit('Create New Band Entry', ['class' => 'btn btn-primary']) !!}
 

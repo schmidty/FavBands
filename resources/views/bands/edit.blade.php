@@ -8,12 +8,25 @@
 
 @section('content')
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+@endif
+
 {!! Form::model( $band, [
     'method'=> 'PATCH',
     'route' => ['bands.update', $band->id ]
 ]) !!}
 
 @include('bands.fields')
+
+<div class="form-group">
+    {!! Form::label('still_active', 'Still Active:', ['class' => 'control-label']) !!}
+    {!! Form::checkbox('still_active', $band->still_active) !!}
+</div>
 
 {!! Form::submit('Save This Band Update', ['class' => 'btn btn-primary']) !!}
 

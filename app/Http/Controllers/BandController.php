@@ -36,13 +36,13 @@ class BandController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $input = $request->all();
-            Band::create($input);
-            return redirect('bands');
-        } catch (Exception $ex) {
-            return Response::json("{}", 404);
-        }
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $input = $request->all();
+        Band::create($input);
+        return redirect('bands');
     }
 
     /**
