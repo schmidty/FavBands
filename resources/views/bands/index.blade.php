@@ -23,7 +23,7 @@
             <tr>
                 <td>
                     <center>
-                        {{ Form::open(['method' => 'put', 'route' => ['albums.edit', $band->id]]) }}
+                        {{ Form::open(['method' => 'post', 'route' => ['bands.edit', $band->id]]) }}
                             {{ Form::hidden('id', $band->id) }}
                             {{ Form::submit('Edit', ['class' => 'btn btn-primary']) }}
                         {{ Form::close() }}
@@ -31,7 +31,7 @@
                 </td>
                 <td>
                     <center>
-                        {{ Form::open(['method' => 'delete', 'route' => ['albums.destroy', $band->id]]) }}
+                        {{ Form::open(['method' => 'delete', 'route' => ['bands.destroy', $band->id]]) }}
                             {{ Form::hidden('id', $band->id) }}
                             {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                         {{ Form::close() }}

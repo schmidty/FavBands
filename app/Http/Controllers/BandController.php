@@ -36,7 +36,13 @@ class BandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $input = $request->all();
+            Band::create($input);
+            return redirect('bands');
+        } catch (Exception $ex) {
+            return Response::json("{}", 404);
+        }
     }
 
     /**
@@ -47,7 +53,9 @@ class BandController extends Controller
      */
     public function show($id)
     {
-        //
+        $band = Band::findOrFail($id);
+
+        return view('band.edit');
     }
 
     /**
@@ -58,7 +66,10 @@ class BandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $band = Band::findOrFail($id);
+        $band = Band::find($id);
+
+        return view('bands.edit')->withBand($band);
     }
 
     /**
@@ -70,7 +81,19 @@ class BandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $band = Band::findOrFail($id);
+        $input = $request->all();
+
+        // handle the boolean for still_active
+        if (!array_key_exists('still_active', $input)) {
+            $input['still_active'] = 0;
+        } else {
+            $input['still_active'] = 1;
+        }
+
+        $band->fill($input)->save();
+
+        return Redirect('bands');
     }
 
     /**
@@ -81,6 +104,11 @@ class BandController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            Band::find($id)->delete();
+            return Redirect('bands');
+        } catch (Exception $ex) {
+            return Response::json("{}", 404);
+        }
     }
 }
