@@ -8,15 +8,18 @@
 
 @section('content')
 
-{!! Form::open([
-    'route' => 'albums.update'
+{!! Form::model( $album, [
+    'method'=> 'PATCH',
+    'route' => ['albums.update', $album->id]
 ]) !!}
 
 @include('albums.fields')
 
 {!! Form::submit('Edit An Album Entry', ['class' => 'btn btn-primary']) !!}
 
-{!! Form::reset('Clear', ['class' => 'btn btn-primary']) !!}
+{!! Form::reset('Clear', ['class' => 'btn btn-danger']) !!}
+
+<button href="{{ url('albums')" class="btn btn-basic">Cancel</button>
 
 {!! Form::close() !!}
 

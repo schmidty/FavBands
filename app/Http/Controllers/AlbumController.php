@@ -20,7 +20,7 @@ class AlbumController extends Controller
 
             $albums = DB::table('album')
                 ->join('band', 'band.id', '=', 'album.band_id')
-                ->select('album.*', 'band.name as band_name')
+                ->select('album.*', 'band.name as band_name', 'band.id as band_id')
                 ->get();
             return view('albums.index', ['bands'=> $bands, 'albums' => $albums]);
     }
@@ -44,13 +44,13 @@ class AlbumController extends Controller
      */
     public function store(Request $request)
     {
-            try {
-                $input = $request->all();
-                Album::create($input);
-                return redirect('albums');
-            } catch (Exception $ex) {
-                return Response::json("{}", 404);
-            }
+        try {
+            $input = $request->all();
+            Album::create($input);
+            return redirect('albums');
+        } catch (Exception $ex) {
+            return Response::json("{}", 404);
+        }
     }
 
     /**
@@ -75,8 +75,10 @@ class AlbumController extends Controller
     public function edit($id)
     {
         $album = Album::findOrFail($id);
+        $bands = Band::find($album->band_id)
+            ->pluck('name', 'id');
 
-        return view('album.edit', compact('album'));
+        return view('albums.edit', ['bands'=>$bands])->withAlbum($album);
     }
 
     /**
@@ -89,14 +91,8 @@ class AlbumController extends Controller
     public function update(Request $request, $id)
     {
         $album = Album::findOrFail($id);
-
-        $album->name = Input::get('name');
-        $album->recorded_date = Input::get('recorded_date');
-        $album->release_date = Input::get('release_date');
-        $album->numberoftracks = Input::get('numberoftracks');
-        $album->label = Input::get('label');
-        $album->genre = Input::get('genre');
-        $album->save();
+        $input = $request->all();
+        $album->fill($input)->save();
 
         return Redirect('albums');
     }

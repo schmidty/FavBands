@@ -34,8 +34,9 @@
             <tr>
                 <td>
                     <center>
-                        {{ Form::open(['method' => 'post', 'action' => ['AlbumController@edit', $album->id]]) }}
+                        {{ Form::open(['method'=>'post', 'action' => ['AlbumController@edit', $album->id]]) }}
                             {{ Form::hidden('id', $album->id) }}
+                            {{ Form::hidden('band_id', $album->band_id) }}
                             {{ Form::submit('Edit', ['class' => 'btn btn-primary']) }}
                         {{ Form::close() }}
                     </center>
@@ -44,6 +45,7 @@
                     <center>
                         {{ Form::open(['method' => 'delete', 'route' => ['albums.destroy', $album->id]]) }}
                             {{ Form::hidden('id', $album->id) }}
+                            {{ Form::hidden('band_id', $album->band_id) }}
                             {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                         {{ Form::close() }}
                     </center>
