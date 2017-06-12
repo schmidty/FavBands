@@ -33,6 +33,8 @@
                     @yield('content')
                 </div>
 
-            </div>
+        </div>
+        <script>
+        </script>
     </body>
 </html>

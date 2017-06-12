@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th data-field="band" data-sortable="true">Band</th>
                 <th data-field="name" data-sortable="true">Album</th>
                 <th data-field="recorded_date" data-sortable="true">Recorded</th>
@@ -32,8 +33,20 @@
         @foreach($albums as $album)
             <tr>
                 <td>
-                    <button id="edit">Edit</button>
-                    <button id='delete'>Delete</button>
+                    <center>
+                        {{ Form::open(['method' => 'post', 'action' => ['AlbumController@edit', $album->id]]) }}
+                            {{ Form::hidden('id', $album->id) }}
+                            {{ Form::submit('Edit', ['class' => 'btn btn-primary']) }}
+                        {{ Form::close() }}
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        {{ Form::open(['method' => 'delete', 'route' => ['albums.destroy', $album->id]]) }}
+                            {{ Form::hidden('id', $album->id) }}
+                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                        {{ Form::close() }}
+                    </center>
                 </td>
                 <td>
                     {{$album->band_name}}

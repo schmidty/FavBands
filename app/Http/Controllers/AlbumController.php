@@ -16,7 +16,6 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
-            error_log(print_r($request,1));
             $bands = Band::pluck('name', 'id');
 
             $albums = DB::table('album')
@@ -62,7 +61,9 @@ class AlbumController extends Controller
      */
     public function show($id)
     {
-        //
+        $album = Album::findOrFail($id);
+
+        return view('album.edit');
     }
 
     /**
@@ -73,7 +74,9 @@ class AlbumController extends Controller
      */
     public function edit($id)
     {
-        //
+        $album = Album::findOrFail($id);
+
+        return view('album.edit', compact('album'));
     }
 
     /**
@@ -85,7 +88,17 @@ class AlbumController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $album = Album::findOrFail($id);
+
+        $album->name = Input::get('name');
+        $album->recorded_date = Input::get('recorded_date');
+        $album->release_date = Input::get('release_date');
+        $album->numberoftracks = Input::get('numberoftracks');
+        $album->label = Input::get('label');
+        $album->genre = Input::get('genre');
+        $album->save();
+
+        return Redirect('albums');
     }
 
     /**
@@ -97,8 +110,8 @@ class AlbumController extends Controller
     public function destroy($id)
     {
         try {
-            $this->album->delete($id);
-            return redirect('albums');
+            Album::find($id)->delete();
+            return Redirect('albums');
         } catch (Exception $ex) {
             return Response::json("{}", 404);
         }

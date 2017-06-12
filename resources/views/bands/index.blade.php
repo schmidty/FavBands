@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>&nbsp;</th>
+                <th>&nbsp;</th>
                 <th data-field="name" data-sortable="true">Band Name</th>
                 <th data-field="start_date" data-sortable="true">Start Date</th>
                 <th data-field="website" data-sortable="true">Website</th>
@@ -21,8 +22,20 @@
         @foreach($bands as $band)
             <tr>
                 <td>
-                    <button id="edit">Edit</button>
-                    <button id='delete'>Delete</button>
+                    <center>
+                        {{ Form::open(['method' => 'put', 'route' => ['albums.edit', $band->id]]) }}
+                            {{ Form::hidden('id', $band->id) }}
+                            {{ Form::submit('Edit', ['class' => 'btn btn-primary']) }}
+                        {{ Form::close() }}
+                    </center>
+                </td>
+                <td>
+                    <center>
+                        {{ Form::open(['method' => 'delete', 'route' => ['albums.destroy', $band->id]]) }}
+                            {{ Form::hidden('id', $band->id) }}
+                            {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
+                        {{ Form::close() }}
+                    </center>
                 </td>
                 <td>
                     {{$band->name}}

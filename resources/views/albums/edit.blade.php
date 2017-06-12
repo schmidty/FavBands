@@ -9,12 +9,12 @@
 @section('content')
 
 {!! Form::open([
-    'route' => 'albums.store'
+    'route' => 'albums.update'
 ]) !!}
 
 @include('albums.fields')
 
-{!! Form::submit('Create New Album Entry', ['class' => 'btn btn-primary']) !!}
+{!! Form::submit('Edit An Album Entry', ['class' => 'btn btn-primary']) !!}
 
 {!! Form::reset('Clear', ['class' => 'btn btn-primary']) !!}
 
