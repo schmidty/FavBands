@@ -10,6 +10,10 @@
 <div>
     <?php // 'bands' select element here  ?>
 </div>
+<div class="form-group">
+    {!!  Form::label('band', 'Band:', ['class' => 'control-label']) !!}
+    {!!  Form::select('band_id', $bands, ['class' => 'form-control']); !!}
+</div>
 <table id="album"  data-toggle="table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>

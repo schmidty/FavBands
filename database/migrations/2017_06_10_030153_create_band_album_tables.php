@@ -20,6 +20,7 @@ class CreateBandAlbumTables extends Migration
 			$table->string('website', 999);
 			$table->boolean('still_active')->default(1);
 
+			$table->timestamps();
 			$table->engine = 'innodb';
 		});
 
@@ -35,6 +36,7 @@ class CreateBandAlbumTables extends Migration
                         $table->string('producer', 250);
                         $table->string('genre', 150);
 
+			$table->timestamps();
 			$table->engine = 'innodb';
                 });
     }

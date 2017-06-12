@@ -21,6 +21,9 @@
                                 <li><a href="/">Home</a></li>
                                 <li><a href="/bands">Bands</a></li>
                                 <li><a href="/albums">Albums</a></li>
+
+                                <li><a href="/bands/create">Add A Band</a></li>
+                                <li><a href="/albums/create">Add An Album</a></li>
                             </ul>
                     </center>
             </div>
