@@ -16,6 +16,7 @@
                 <th data-field="start_date" data-sortable="true">Start Date</th>
                 <th data-field="website" data-sortable="true">Website</th>
                 <th data-field="active" data-sortable="true">Band Is Still Active</th>
+                <th data-field="album" data-sortable="true">Album</th>
             </tr>
         </thead>
         <tbody>
@@ -48,6 +49,9 @@
                 </td>
                 <td>
                     <?php echo ($band->still_active) ? "Yes" : "No" ?>
+                </td>
+                <td>
+                    {{$band->album_name}}
                 </td>
             </tr>
         @endforeach

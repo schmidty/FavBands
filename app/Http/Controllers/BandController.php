@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Band;
+use App\Album;
 
 class BandController extends Controller
 {
@@ -14,8 +16,12 @@ class BandController extends Controller
      */
     public function index()
     {
-        $bands = Band::all();
-        return view('bands.index', compact('bands'));
+        $bands = DB::table('band')
+            ->leftJoin('album', 'band.id', '=', 'album.band_id')
+            ->select('band.*', 'album.name as album_name')
+            ->get();
+        return view('bands.index', ['bands'=>$bands]);
+
     }
 
     /**
