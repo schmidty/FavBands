@@ -24,21 +24,21 @@ class CreateBandAlbumTables extends Migration
 			$table->engine = 'innodb';
 		});
 
-                Schema::create('album', function(Blueprint $table) {
-			$table->increments('id');
-			$table->integer('band_id')->unsigned()->default(0);
-                        $table->foreign('band_id')->references('id')->on('band')->onDelete('cascade');
-                        $table->string('name');
-                        $table->string('recorded_date')->nullable();
-                        $table->date('release_date')->nullable();
-                        $table->integer('numberoftracks')->nullable();
-                        $table->string('label', 250)->nullable();
-                        $table->string('producer', 250)->nullable();
-                        $table->string('genre', 150)->nullable();
+        Schema::create('album', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('band_id')->unsigned()->default(0);
+            //$table->foreign('band_id')->references('id')->on('band')->onDelete('cascade');
+            $table->string('name');
+            $table->string('recorded_date')->nullable();
+            $table->date('release_date')->nullable();
+            $table->integer('numberoftracks')->nullable();
+            $table->string('label', 250)->nullable();
+            $table->string('producer', 250)->nullable();
+            $table->string('genre', 150)->nullable();
 
-			$table->timestamps();
-			$table->engine = 'innodb';
-                });
+            $table->timestamps();
+            $table->engine = 'innodb';
+        });
     }
 
     /**
