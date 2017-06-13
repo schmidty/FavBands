@@ -16,14 +16,10 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
+        //    \Illuminate\Support\Facades\Cache::flush(); /* not sure if this is working? */
         $bands = Band::pluck('name', 'id');
-
-        $albums = DB::table('album')
-            ->join('band', 'band.id', '=', 'album.band_id')
-            ->select('album.*', 'band.name as band_name', 'band.id as band_id')
-            ->get();
-
         $bands[0] = 'All';
+        $albums = $this->getAlbumsByBandIdOrNull();
 
         return view('albums.index', ['bands'=> $bands, 'albums' => $albums, 'selected' => '0']);
     }
@@ -116,24 +112,40 @@ class AlbumController extends Controller
         }
     }
 
+    /**
+     * @param int $band_id
+     * @return object $albums
+     */
+    protected function getAlbumsByBandIdOrNull($band_id=null)
+    {
+        $albums = null;
 
+        if ($band_id) {
+            $albums = DB::table('album')
+                ->join('band', 'band.id', '=', 'album.band_id')
+                ->select('album.*', 'band.name as band_name', 'band.id as band_id')
+                ->where('album.band_id', '=', $band_id)
+                ->get();
+        } else {
+            $albums = DB::table('album')
+                ->join('band', 'band.id', '=', 'album.band_id')
+                ->select('album.*', 'band.name as band_name', 'band.id as band_id')
+                ->get();
+        }
+        return $albums;
+    }
+
+    /**
+     * @param Request $request
+     * @return string view
+     */
     public function filtered(Request $request)
     {
-        //    \Illuminate\Support\Facades\Cache::flush();
-        
         $selected = $request->band_id;
         $bands = Band::pluck('name', 'id');
-
-        $albums = DB::table('album')
-            ->join('band', 'band.id', '=', 'album.band_id')
-            ->select('album.*', 'band.name as band_name', 'band.id as band_id')
-            ->where('album.band_id', '=', $selected)
-            ->get();
-
+        $albums = $this->getAlbumsByBandIdOrNull($selected);
         $bands[0] = 'All';
 
-        return (String) view('albums.index', ['bands'=> $bands, 'albums' => $albums, 'selected' => $selected]);
-            //->header('Content-Type', 'text/html');
-
+        return (String) view('albums.partial', ['bands'=> $bands, 'albums' => $albums]);
     }
 }
