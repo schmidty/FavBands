@@ -34,6 +34,17 @@ class BandsAlbumsSeeder extends Seeder
                 'genre'=>"hard rock"
             ]);
 
+            DB::table("album")->insert([
+                'band_id'=>$band_id,
+                'name'=>"Lies",
+                'recorded_date'=>"1988",
+                'release_date'=>"1988-11-30",
+                'numberoftracks'=>8,
+                'label'=>"Geffen",
+                'producer'=>"Mike Clink and Guns 'N Roses",
+                'genre'=>"hard rock"
+            ]);
+
             $band_id = DB::table('band')->select('id')->where('name', '=', "Led Zeppelin")->first()->id;
             DB::table("album")->insert([
                 'band_id'=>$band_id,
