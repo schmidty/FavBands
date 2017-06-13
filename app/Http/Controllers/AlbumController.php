@@ -103,7 +103,7 @@ class AlbumController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param nint  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -119,6 +119,21 @@ class AlbumController extends Controller
 
     public function filtered(Request $request)
     {
-        error_log("band_id: ". $request['band_id']);
+        //    \Illuminate\Support\Facades\Cache::flush();
+        
+        $selected = $request->band_id;
+        $bands = Band::pluck('name', 'id');
+
+        $albums = DB::table('album')
+            ->join('band', 'band.id', '=', 'album.band_id')
+            ->select('album.*', 'band.name as band_name', 'band.id as band_id')
+            ->where('album.band_id', '=', $selected)
+            ->get();
+
+        $bands[0] = 'All';
+
+        return (String) view('albums.index', ['bands'=> $bands, 'albums' => $albums, 'selected' => $selected]);
+            //->header('Content-Type', 'text/html');
+
     }
 }

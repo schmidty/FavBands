@@ -14,6 +14,7 @@
     {!!  Form::label('band', 'Band:', ['class' => 'control-label']) !!}
     {!!  Form::select('band_id', $bands, $selected, ['class' => 'form-control', 'id'=>'band_id']); !!}
 </div>
+<input type="hidden" id="token" value="{{ csrf_token() }}">
 <table id="album"  data-toggle="table" class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
@@ -90,16 +91,27 @@
                 }
             });
 
+$.post("{{ url('albumsfiltered') }}",  { band_id:band_id, 'token': '{{ csrf_token() }}' }, function(data) {
+     if ( data.status == 'ok' )
+         window.location.replace(data.url);
+});
 
+/*
            $.ajax({
                type: "POST",
-               url: "albums-filtered",
+               url: "{{ url('albumsfiltered') }}",
                dataType: "json",
-               data: {band_id:band_id}, "_token":"{{ csrf_token() }}",
-               success: function() {
-                   console.log("success "+band_id);
+               data: { band_id:band_id, 'token': '{{ csrf_token() }}' },
+               error: function(err) {
+                      console.log('hit failure: '+JSON.stringify(err));
+               },
+               success: function(data) {
+                      //data = $(data); // the HTML content your controller has produced
+                      console.log('hit success');
+                      $('#container-navbar').html(data.responseText);
                }
            });
+     */
         });
      });
 </script>
