@@ -25,7 +25,7 @@ class Album extends Model
          */
         public function band()
         {
-            return $this->belongsTo('App\Band');
+            return $this->belongsTo('App\Band', 'band_id');
         }
 
 }

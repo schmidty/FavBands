@@ -16,15 +16,21 @@ class BandController extends Controller
      */
     public function index()
     {
+        /*   // This seems like it would be A LOT easier to do than use Laravel relationships?
         $bands = DB::table('band')
             ->leftJoin('album', 'band.id', '=', 'album.band_id')
             ->select('band.*', 'album.name as album_name')
             ->get();
-        //$albums = Album::with('band')->get();
-        //$bands = Band::get();
-        //var_dump($albums);die();
+         * 
+         */
+
+        // Trying to use Laravel relationships... ugh?!?
+        $albums = Album::with('band')->get();
+        $bands = Band::get()->toArray();
+        array_unshift($bands, 'null'); unset($bands[0]);
+        //var_dump(print_r($bands));die();
         return view('bands.index', [
-            //'bands_with_albums'=>$albumsWithBands,
+            'albums'=>$albums,
             'bands'=> $bands,
         ]);
 

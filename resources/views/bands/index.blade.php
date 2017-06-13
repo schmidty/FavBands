@@ -21,38 +21,38 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($bands as $band)
+        @foreach($albums as $album)
             <tr>
                 <td>
                     <center>
-                        {{ Form::open(['method' => 'post', 'route' => ['bands.edit', $band->id]]) }}
-                            {{ Form::hidden('id', $band->id) }}
+                        {{ Form::open(['method' => 'post', 'route' => ['bands.edit', $bands[$album->band_id]['id']]]) }}
+                            {{ Form::hidden('id', $bands[$album->band_id]['id']) }}
                             {{ Form::submit('Edit', ['class' => 'btn btn-primary']) }}
                         {{ Form::close() }}
                     </center>
                 </td>
                 <td>
                     <center>
-                        {{ Form::open(['method' => 'delete', 'route' => ['bands.destroy', $band->id]]) }}
-                            {{ Form::hidden('id', $band->id) }}
+                        {{ Form::open(['method' => 'delete', 'route' => ['bands.destroy', $bands[$album->band_id]['id']]]) }}
+                            {{ Form::hidden('id', $bands[$album->band_id]['id']) }}
                             {{ Form::submit('Delete', ['class' => 'btn btn-danger']) }}
                         {{ Form::close() }}
                     </center>
                 </td>
                 <td>
-                    {{$band->name}}
+                    {{ $bands[$album->band_id]['name'] }}
                 </td>
                 <td>
-                    {{$band->start_date}}
+                    {{ $bands[$album->band_id]['start_date'] }}
                 </td>
                 <td>
-                    {{$band->website}}
+                    {{ $bands[$album->band_id]['website'] }}
                 </td>
                 <td>
-                    <?php echo ($band->still_active) ? "Yes" : "No" ?>
+                    <?php echo ($bands[$album->band_id]['still_active']) ? "Yes" : "No"; ?>
                 </td>
                 <td>
-                    {{$band->album_name}}
+                    {{ $album->name }}
                 </td>
             </tr>
         @endforeach
