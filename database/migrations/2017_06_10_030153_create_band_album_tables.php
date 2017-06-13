@@ -26,8 +26,7 @@ class CreateBandAlbumTables extends Migration
 
         Schema::create('album', function(Blueprint $table) {
             $table->increments('id');
-            $table->integer('band_id')->unsigned()->default(0);
-            //$table->foreign('band_id')->references('id')->on('band')->onDelete('cascade');
+            $table->integer('band_id')->unsigned()->index();
             $table->string('name');
             $table->string('recorded_date')->nullable();
             $table->date('release_date')->nullable();
@@ -37,6 +36,8 @@ class CreateBandAlbumTables extends Migration
             $table->string('genre', 150)->nullable();
 
             $table->timestamps();
+
+            $table->foreign('band_id')->references('id')->on('band');
             $table->engine = 'innodb';
         });
     }
