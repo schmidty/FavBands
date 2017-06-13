@@ -1,6 +1,6 @@
 <div class="form-group">
     {!!  Form::label('band', 'Band:', ['class' => 'control-label']) !!}
-    {!!  Form::select('band_id', $bands, ['class' => 'form-control']); !!}
+    {!!  Form::select('band_id', $bands, null, ['class' => 'form-control']); !!}
 </div>
 
 <div class="form-group">
