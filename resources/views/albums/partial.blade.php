@@ -4,8 +4,8 @@
             <tr>
                 <th>&nbsp;</th>
                 <th>&nbsp;</th>
-                <th data-field="band" data-sortable="true">Band</th>
                 <th data-field="name" data-sortable="true">Album</th>
+                <th data-field="band" data-sortable="true">Band</th>
                 <th data-field="recorded_date" data-sortable="true">Recorded</th>
                 <th data-field="release_date" data-sortable="true">Released</th>
                 <th data-field="numberoftracks" data-sortable="true">Number of Tracks</th>
@@ -36,10 +36,10 @@
                     </center>
                 </td>
                 <td>
-                    {{$album->band_name}}
+                    {{$album->name}}
                 </td>
                 <td>
-                    {{$album->name}}
+                    {{$album->band_name}}
                 </td>
                 <td>
                     {{$album->recorded_date}}
