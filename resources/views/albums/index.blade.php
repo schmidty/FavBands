@@ -7,9 +7,7 @@
 @stop
 
 @section('content')
-<div>
-    <?php // 'bands' select element here  ?>
-</div>
+<div class='page-header'><h3>List of Albums</h3></div>
 
 <div class="form-group">
     {!!  Form::label('band', 'Band:', ['class' => 'control-label']) !!}

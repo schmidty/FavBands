@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<div class='page-header'><h3>List of Bands</h3></div>
 <table id="bands"  data-toggle="table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>

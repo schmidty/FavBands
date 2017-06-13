@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<div class='page-header'><h3>Edit an Album</h3></div>
 
 @if($errors->any())
     <div class="alert alert-danger">
