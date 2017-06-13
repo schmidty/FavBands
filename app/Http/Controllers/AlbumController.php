@@ -16,13 +16,16 @@ class AlbumController extends Controller
      */
     public function index(Request $request)
     {
-            $bands = Band::pluck('name', 'id');
+        $bands = Band::pluck('name', 'id');
 
-            $albums = DB::table('album')
-                ->join('band', 'band.id', '=', 'album.band_id')
-                ->select('album.*', 'band.name as band_name', 'band.id as band_id')
-                ->get();
-            return view('albums.index', ['bands'=> $bands, 'albums' => $albums]);
+        $albums = DB::table('album')
+            ->join('band', 'band.id', '=', 'album.band_id')
+            ->select('album.*', 'band.name as band_name', 'band.id as band_id')
+            ->get();
+
+        $bands[0] = 'All';
+
+        return view('albums.index', ['bands'=> $bands, 'albums' => $albums, 'selected' => '0']);
     }
 
     /**
@@ -111,5 +114,11 @@ class AlbumController extends Controller
         } catch (Exception $ex) {
             return Response::json("{}", 404);
         }
+    }
+
+
+    public function filtered(Request $request)
+    {
+        error_log("band_id: ". $request['band_id']);
     }
 }

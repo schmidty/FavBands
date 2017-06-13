@@ -9,6 +9,7 @@
                     margin: 2.5%;
             }
         </style>
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
     </head>
     <body>

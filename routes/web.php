@@ -15,6 +15,7 @@ Route::resource('albums', 'AlbumController');
 
 Route::post('/albums/{id}/edit', 'AlbumController@edit');
 Route::post('/bands/{id}/edit', 'BandController@edit');
+Route::post('/albums-filtered', 'AlbumController@filtered');
 
 Route::get('/', function () {
     return redirect('/bands');
