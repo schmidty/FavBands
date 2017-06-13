@@ -20,7 +20,13 @@ class BandController extends Controller
             ->leftJoin('album', 'band.id', '=', 'album.band_id')
             ->select('band.*', 'album.name as album_name')
             ->get();
-        return view('bands.index', ['bands'=>$bands]);
+        //$albums = Album::with('band')->get();
+        //$bands = Band::get();
+        //var_dump($albums);die();
+        return view('bands.index', [
+            //'bands_with_albums'=>$albumsWithBands,
+            'bands'=> $bands,
+        ]);
 
     }
 
