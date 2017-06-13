@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Band;
+use App\Album;
 
 class BandController extends Controller
 {
@@ -109,11 +110,10 @@ class BandController extends Controller
      */
     public function destroy($id)
     {
-        try {
-            Band::find($id)->delete();
-            return Redirect('bands');
-        } catch (Exception $ex) {
-            return Response::json("{}", 404);
-        }
+        $band = Band::find($id);
+        $band->albums()->delete();
+        $band->delete();
+
+        return Redirect('bands');
     }
 }
